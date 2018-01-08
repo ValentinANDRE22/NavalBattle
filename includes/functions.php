@@ -39,6 +39,16 @@ function initGame(){
 
 	$_SESSION["gridPlay"]= $gridPlay;
 
+	//Initialisation du tableau des points de dégats des navires
+	$tablePDNavire =  array(
+		'pa' => 0, 
+		'c'	 => 0,
+		'ct' => 0,
+		'sm' => 0,
+		't'  => 0,
+		);
+
+	$_SESSION["tablePVNavire"] = $tablePVNavire;
 }
 
 
