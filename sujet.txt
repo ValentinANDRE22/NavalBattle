@@ -1,0 +1,84 @@
+
+Bonjour à tous,
+
+Voici votre sujet d'évaluation du module PHP.
+
+Le but est de développer, en PHP "from scratch" (donc sans framework) le jeu de la bataille navale (1 seul joueur).
+
+Règles du jeu :
+- Le jeu se déroule sur un tableau de 10 cases par 10 cases. Les cases horizontales sont numérotées de A à J. Les cases verticales sont numérotées de 1 à 10.
+- Une partie démarre lorsque les bateaux ont été cachés :
+   - 1 porte-avions (5 cases)
+   - 1 croiseur (4 cases)
+   - 1 contre-torpilleur (3 cases)
+   - 1 sous-marin (3 cases)
+   - 1 torpilleur (2 cases)
+
+- Le joueur choisit ensuite une case à "torpiller", par exemple B-7. Le jeu répond alors de 3 façons différentes :
+   - manqué : aucun bateau n'a été touché
+   - touché : un bateau a été touché
+   - coulé : un bateau a été touché sur l'ensemble de ses cases
+
+- L'affichage doit permettre de visualiser au fur et à mesure les cases torpillées et les bateaux touchés et ou coulés.
+
+- La partie se termine lorsque tous les bateaux sont coulés
+
+----
+
+Proposition d'ordre pour le développement :
+
+1. Créer l'initialisation du quadrillage et le placement aléatoire des bateaux. Attention, les bateaux ne peuvent pas se chevaucher.
+
+2. Créer l'interface qui permettra de consulter d'un côté le tableau et de l'autre de choisir les cases à torpiller à l'aide d'un formulaire.
+
+3. Faire le traitement du choix d'une case, avec des retours utilisateurs et une mise à jour visuelle (simple) du quadrillage.
+
+4. Une partie doit pouvoir être réinitialisée.
+
+5. Pour aller + loin, les parties peuvent être sauvegardées en base de données, en mémorisant notamment le nombre de coups nécessaire pour couler tous les bateaux.
+
+----
+
+Consignes :
+
+Tout le code doit être commenté, tous les standards de programmation vus en cours doivent être respectés. Un code fonctionnel mais non commenté et ou mal codé rapportera moins de points, voir aucun.
+
+L'organisation des fichiers doit être travaillée.
+
+Pour la mise en page, Bootstrap et les classes déjà créées en cours peuvent être réutilisées.
+
+De la même manière, pour le lien à la base de données, les classes déjà créées en cours peuvent être réutilisées.
+
+Le projet peut être réalisé seul ou par groupe de 2 à 3. Pas plus. Si le projet est réalisé en groupe, chaque participant doit expliquer clairement quelle partie du code il a pris en charge, et quelles difficultés il a rencontré. Une pénalité de 10 points sera appliquée si cette condition n' est pas remplie.
+
+Je serais forcément plus sévère sur le travail rendu en groupe, et plus indulgent sur le travail rendu seul.
+
+---
+
+Barème indicatif :
+
+Partie 1 : 6 points
+Partie 2 : 4 points
+Partie 3 : 10 points
+Partie 4 : 1 point
+Partie 5 : 4 points
+
+---
+
+Le projet est à me rendre par retour de ce mail d'ici le 10 Janvier 2018 au format .zip.
+Les délais étant "un peu serrés", le barème est sur 25. Libre à vous de réaliser ce que vous pouvez.
+
+Toute réutilisation d'un code trouvé en ligne entrainera la note de 0 et une mention particulière à vos responsables pédagogiques.
+
+Vous aurez vos notes d'ici le 16/17 Janvier 2018.
+
+---
+
+Je reste à votre disposition si vous avez des questions.
+
+Merci beaucoup
+
+Bon courage
+
+Arthur Weill
+Web and Cow
