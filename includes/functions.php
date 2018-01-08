@@ -48,7 +48,7 @@ function initGame(){
 		't'  => 0,
 		);
 
-	$_SESSION["tablePVNavire"] = $tablePVNavire;
+	$_SESSION["tablePDNavire"] = $tablePDNavire;
 }
 
 
