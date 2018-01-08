@@ -3,8 +3,8 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<?php
+		include 'includes/all.php';
 		session_start();
-	include '../includes/all.php';
 
 	?>
 	<title>
@@ -22,8 +22,19 @@
 
 </head>
 <body>
+<?php 
+
+//On test si une partie est déjà en cours.
+if($_SESSION["newsession"]  != true){
+	initGame();
+	echo displayGrid($_SESSION["gridPlay"]);
+} else {
+echo displayGrid($_SESSION["gridPlay"]);
+}
 
 
+
+ ?>
 
 
 
