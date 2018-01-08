@@ -9,10 +9,10 @@ define("sm",    "Sous-marin");
 define("t", "Torpilleur");
 
 //Definition des constantes des tailles de navire
-define("Porte-avions",     5);
+define("PorteAvions",     5);
 define("Croiseur",    4);
-define("Contre-torpilleur", 3);
-define("Sous-marin",    3);
+define("ContreTorpilleur", 3);
+define("SousMarin",    3);
 define("Torpilleur", 2);
 
 
