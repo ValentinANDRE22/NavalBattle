@@ -1,13 +1,22 @@
 	<?php 
 	session_start();
 	include 'includes/all.php';
-/*	if (isset($_SESSION["reinit"]) && $_SESSION["reinit"] == 1) {
-		initGame();
-	}*/
+	//On controle si une session existe déjà.
+	if (isset($_SESSION["gridRef"])) {
+		//Si ell existe un récupère les donnée de la partie en session.
+		echo 'il y a une cession';
+		$gridRef = $_SESSION["gridRef"];
+		$gridPlay = $_SESSION["gridPlay"];
+		$tablePvNavire = $_SESSION["tablePvNavire"];
+	} else {
+		//Sinon on initialise une nouvelle partie.
+		$gridRef = InitGridRef();
+		$gridPlay = InitGridPlay();
+		$tablePvNavire = InitTablePv();
 
-	$gridRef = InitGridRef();
-	$gridPlay = InitGridPlay();
-	$tablePvNavire = InitTablePv();
+	}
+
+
 
 	?>
 	<!DOCTYPE html>
@@ -49,8 +58,8 @@
 						<input type="submit" name="reinitialisation" value="Réinitialiser" class="btn btn-success">
 					</form>
 					<?php 
-										echo displayGrid($gridPlay);
-				
+					echo displayGrid($gridPlay);
+
 					?>
 				</div>
 				<div class="col-md-5">
@@ -80,7 +89,12 @@
 
 
 
-
+<?php 
+// On garde en session les donnèes de la partie.
+$_SESSION["gridRef"] = $gridRef;
+$_SESSION["gridPlay"] = $gridPlay ;
+$_SESSION["tablePvNavire"] = $tablePvNavire;
+?>
 
 </body>
 </html>
