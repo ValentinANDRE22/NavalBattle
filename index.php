@@ -1,6 +1,9 @@
 	<?php 
 	session_start();
 	include 'includes/all.php';
+	if (isset($_SESSION["reinit"]) && $_SESSION["reinit"] == 1) {
+		initGame();
+	}
 
 	?>
 	<!DOCTYPE html>
@@ -23,11 +26,16 @@
 
 	</head>
 	<body>
-	<br> 
-	<br>
+		<br> 
+		<br>
+		<?php 
+		$randomOrigine = rand(0,10 - PorteAvions);
+		echo $randomOrigine;
 
+		echo displayGrid($_SESSION["gridRef"]);
+		?>
 		<div class="container">
-		<h1>Bataille Navale</h1>
+			<h1>Bataille Navale</h1>
 			<div class="row">
 				<div class="col-md-7">
 
@@ -48,28 +56,25 @@
 					?>
 				</div>
 				<div class="col-md-5">
-	<div class="jumbotron">
+					<div class="jumbotron">
 						<p>X = Touché.</p>
 						<p>O = A l'eau.</p>
 						<p>C = Coulé.</p>
 					</div>
-					</br>
-					<div class="alert alert-danger"><STRONG>Erreur :</STRONG> Coordonnées incorrecte.</div>
-  					</br>
-					<form action="index.php" method="POST">
-						<label>Colonne</label>
-						<input type="text" name="y"></br>
-						<label>Ligne</label>
-						<input type="text" name="x"></br>
-						<input type="submit" name="valider" value="Valider" class="btn btn-primary">
-					</form>
+				</br>
+				<div class="alert alert-danger"><STRONG>Erreur :</STRONG> Coordonnées incorrecte.</div>
+			</br>
+			<form action="index.php" method="POST">
+				<label>Colonne</label>
+				<input type="text" name="y"></br>
+				<label>Ligne</label>
+				<input type="text" name="x"></br>
+				<input type="submit" name="valider" value="Valider" class="btn btn-primary">
+			</form>
 
-
-				</div>
-
-
-			</div>
 		</div>
+	</div>
+</div>
 
 
 
@@ -79,5 +84,5 @@
 
 
 
-	</body>
-	</html>
+</body>
+</html>
