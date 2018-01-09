@@ -1,9 +1,13 @@
 	<?php 
 	session_start();
 	include 'includes/all.php';
-	if (isset($_SESSION["reinit"]) && $_SESSION["reinit"] == 1) {
+/*	if (isset($_SESSION["reinit"]) && $_SESSION["reinit"] == 1) {
 		initGame();
-	}
+	}*/
+
+	$gridRef = InitGridRef();
+	$gridPlay = InitGridPlay();
+	$tablePvNavire = InitTablePv();
 
 	?>
 	<!DOCTYPE html>
@@ -32,7 +36,7 @@
 		$randomOrigine = rand(0,10 - PorteAvions);
 		echo $randomOrigine;
 
-		echo displayGrid($_SESSION["gridRef"]);
+		echo displayGrid($gridRef);
 		?>
 		<div class="container">
 			<h1>Bataille Navale</h1>
@@ -45,14 +49,8 @@
 						<input type="submit" name="reinitialisation" value="Réinitialiser" class="btn btn-success">
 					</form>
 					<?php 
-//On test si une partie est déjà en cours.
-					if(isset($_SESSION["newsession"]) && $_SESSION["newsession"]  != true){
-
-						echo displayGrid($_SESSION["gridPlay"]);
-					} else {
-						initGame();
-						echo displayGrid($_SESSION["gridPlay"]);
-					}
+										echo displayGrid($gridPlay);
+				
 					?>
 				</div>
 				<div class="col-md-5">

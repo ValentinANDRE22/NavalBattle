@@ -1,15 +1,13 @@
 <?php 
 
-//Function d'initialisation de la partie avec la création des tableaux
-// et le placement des bateaux.
+//Function de création du tableau de référence
 //
-// 
-function initGame(){
-
-	$_SESSION["newsession"]= true;
+//
+//@return array contenant les coordonées des bateaux
+function InitGridRef(){
 
 	//Initialisation du tableau contenant les coordonées des bateaux
-  $gridRef = array();
+  $gridRef = [];
   $gridRef[0] = array('','','','','','','','','','');
   $gridRef[1] = array('','','','','','','','','','');
   $gridRef[2] = array('','','','','','','','','','');
@@ -21,13 +19,18 @@ function initGame(){
   $gridRef[8] = array('','','','','','','','','','');
   $gridRef[9] = array('','','','','','','','','','');
 
-  $gridRef = placeBoat($gridRef);
+  $gridRef = placeBoats($gridRef);
 
-  $_SESSION["gridRef"]= $gridRef;
+return $gridRef;
+}
 
+//Function de création du tableau de jeu
+//
+//@return array contenant les résultats des tires effectué.
+function InitGridPlay(){
 
 	//Initialisation du tableau contenant les résultats des tires effectué.
-  $gridPlay = array();
+  $gridPlay = [];
   $gridPlay[0] = array('','','','','','','','','','');
   $gridPlay[1] = array('','','','','','','','','','');
   $gridPlay[2] = array('','','','','','','','','','');
@@ -39,63 +42,81 @@ function initGame(){
   $gridPlay[8] = array('','','','','','','','','','');
   $gridPlay[9] = array('','','','','','','','','','');
 
-  $_SESSION["gridPlay"]= $gridPlay;
+ return $gridPlay;
 
-	//Initialisation du tableau des points de dégats des navires
+}
+
+//Function de création du tableau des points de vies
+//
+//@return array contenant les points de vie initial de chaque bateau
+function InitTablePv()
+{
+
+ //Initialisation du tableau des points de vie des navires
   $tablePvNavire =  array(
     'pa' => PorteAvions, 
-    'c'	 => Croiseur,
+    'c'  => Croiseur,
     'ct' => ContreTorpilleur,
     'sm' => SousMarin,
     't'  => Torpilleur,
     );
 
-  $_SESSION["tablePvNavire"] = $tablePvNavire;
+  return $tablePvNavire;
 }
 
 //Function de placement des bateaux
 //
 //@param tableau de référence vide
 //@return tableau contenant les coordonées des bateaux
-function placeBoat($gridRef)
+function placeBoats($gridRef)
 {
 
-  //Placement du porte avions
+ //Placement du porte avions
+  $codeBoat = 'pa';
+  $lengthBoat = PorteAvions;
+  $gridRef = placeBoat($codeBoat, $lengthBoat, $gridRef);
+
+  return $gridRef;
+}
+
+
+//Fonction qui place un bateau
+//
+//@param le code du bateau et son nombre de case et le tableau pour placer le bateau
+//@return le tableau avec le bateau placé
+function placeBoat($codeBoat, $lengthBoat, $gridRef)
+{
+
   //Horrizontale ou verticale
   $randomOrientation = rand(1,2);
   //Si 1 alors verticale
   if($randomOrientation == 1) {
 
     $x = rand(0,9);
-    $randomY = rand(0,9 - PorteAvions);
-    $YLimite = $randomY + PorteAvions;
+    $randomY = rand(0,9 - $lengthBoat);
+    $YLimite = $randomY + $lengthBoat;
 
     for ($y = $randomY; $y < $YLimite; $y++) { 
-      var_dump($y);
-      var_dump($x);
-
-      $gridRef[$y][$x] = 'pa';
-      var_dump($gridRef[$y][$x]);
+      var_dump('verticale le deuxième ne change pas');
+      var_dump($y . $x);
+     $gridRef[$y][$x] = $codeBoat;
     }
   }
   //Si 2 alors horizontale
   if ($randomOrientation == 2) {
     $y = rand(0,9);
-    $randomX = rand(0,9 - PorteAvions);
-    $XLimite = $randomX + PorteAvions;
+    $randomX = rand(0,9 - $lengthBoat);
+    $XLimite = $randomX + $lengthBoat;
     for ($x = $randomX; $x < $XLimite; $x++) { 
-      var_dump($y);
-      var_dump($x);
+      var_dump('horizontale le premier ne change pas');
+ var_dump($y . $x);
+     $gridRef[$y][$x] = $codeBoat;
 
-      $gridRef[$y][$x] = 'pa';
     }
   }
 
-
-
   return $gridRef;
 }
-
 
 
 
@@ -127,20 +148,14 @@ function displayGrid($grid)
   </thead>
   <tbody>';
 
-
     for ($y=0; $y < 10; $y++) { 
-
       $out .='  <tr>
       <td>'.($y + 1).'</td>';
-
       for ($x=0; $x < 10; $x++) { 
        $out .= '<td>'.$grid[$y][$x].'</td>';
      }
-
      $out .= '</tr>';
    }
-
-
 
    $out .='</tbody>
  </table>';  
