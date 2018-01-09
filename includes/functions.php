@@ -21,7 +21,7 @@ function InitGridRef(){
 
   $gridRef = placeBoats($gridRef);
 
-return $gridRef;
+  return $gridRef;
 }
 
 //Function de création du tableau de jeu
@@ -42,7 +42,7 @@ function InitGridPlay(){
   $gridPlay[8] = array('','','','','','','','','','');
   $gridPlay[9] = array('','','','','','','','','','');
 
- return $gridPlay;
+  return $gridPlay;
 
 }
 
@@ -76,6 +76,28 @@ function placeBoats($gridRef)
   $lengthBoat = PorteAvions;
   $gridRef = placeBoat($codeBoat, $lengthBoat, $gridRef);
 
+
+  //Placement du croiseur
+  $codeBoat = 'c';
+  $lengthBoat = Croiseur;
+  $gridRef = placeBoat($codeBoat, $lengthBoat, $gridRef);
+
+  //Placement du contre torpilleur
+  $codeBoat = 'ct';
+  $lengthBoat = ContreTorpilleur;
+  $gridRef = placeBoat($codeBoat, $lengthBoat, $gridRef);
+
+  //Placement du sous marin
+  $codeBoat = 'sm';
+  $lengthBoat = SousMarin;
+  $gridRef = placeBoat($codeBoat, $lengthBoat, $gridRef);
+
+  //Placement du torpilleur
+  $codeBoat = 't';
+  $lengthBoat = Torpilleur;
+  $gridRef = placeBoat($codeBoat, $lengthBoat, $gridRef);
+
+
   return $gridRef;
 }
 
@@ -86,38 +108,59 @@ function placeBoats($gridRef)
 //@return le tableau avec le bateau placé
 function placeBoat($codeBoat, $lengthBoat, $gridRef)
 {
+ 
+    $countError = 1;
+   do {
+     $countError = 0;
+     $tableCoords = [];
 
-  //Horrizontale ou verticale
-  $randomOrientation = rand(1,2);
-  //Si 1 alors verticale
-  if($randomOrientation == 1) {
+    //Horrizontale ou verticale
+     $randomOrientation = rand(1,2);
+    //Si 1 alors verticale
+     if($randomOrientation == 1) {
 
-    $x = rand(0,9);
-    $randomY = rand(0,9 - $lengthBoat);
-    $YLimite = $randomY + $lengthBoat;
+      $x = rand(0,9);
+      $randomY = rand(0,10 - $lengthBoat);
+      $YLimite = $randomY + $lengthBoat;
 
-    for ($y = $randomY; $y < $YLimite; $y++) { 
-      var_dump('verticale le deuxième ne change pas');
-      var_dump($y . $x);
-     $gridRef[$y][$x] = $codeBoat;
-    }
-  }
-  //Si 2 alors horizontale
-  if ($randomOrientation == 2) {
+     
+      for ($y = $randomY; $y < $YLimite; $y++) { 
+       $tableCoords[] = array($y,$x);
+     }
+   }
+    //Si 2 alors horizontale
+   if ($randomOrientation == 2) {
     $y = rand(0,9);
-    $randomX = rand(0,9 - $lengthBoat);
+    $randomX = rand(0,10 - $lengthBoat);
     $XLimite = $randomX + $lengthBoat;
     for ($x = $randomX; $x < $XLimite; $x++) { 
-      var_dump('horizontale le premier ne change pas');
- var_dump($y . $x);
-     $gridRef[$y][$x] = $codeBoat;
+     $tableCoords[] = array($y,$x);
 
+   }
+  }
+  //Controle de la disponibilité des cases
+  foreach ($tableCoords as $coord) {
+    if($gridRef[$coord[0]][$coord[1]] != ""){
+      $countError ++;
     }
+  }
+
+  }  while ($countError != 0);
+
+  foreach ($tableCoords as $coord) {
+    $gridRef[$coord[0]][$coord[1]] = $codeBoat;
   }
 
   return $gridRef;
 }
 
+/*//Fonction check le contenu d'une case.
+//
+//@param les coordonnées de la case et le tableau
+//@return le contenu de la case
+function CheckCase($y,$x, $gridRef) {
+  return 
+}*/
 
 
 
