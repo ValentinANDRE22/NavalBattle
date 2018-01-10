@@ -1,5 +1,6 @@
 <?php 
 
+
 //Function de création du tableau de référence
 //
 //
@@ -63,6 +64,44 @@ function InitTablePv()
 
   return $tablePvNavire;
 }
+
+//Function qui retourne les bateaux coulé.
+//
+//@param le tableau des points de vie
+//@return array contenant les bateaux coulé.
+function BoatDown($tablePvNavire)
+{
+  $boatDown = [];
+
+  foreach ($tablePvNavire as $key => $value) {
+    if($value == 0){
+      $boatDown[] = $key;
+    }
+  }
+
+  return $boatDown;
+}
+
+
+//Function qui marque les bateaux coulé.
+//
+//@param le tableau des bateaux coulé, et le tableau de jeu et le tableau de ref
+//@return le tableau de jeu
+function markDown($boatDown, $gridPlay, $gridRef)
+{
+  for ($y=0; $y < 10; $y++) { 
+     
+      for ($x=0; $x < 10; $x++) { 
+        foreach ($boatDown as $key => $value) {
+          if($gridRef[$y][$x] == $value){
+              $gridPlay[$y][$x] = "C";
+          }
+        }
+     }
+   }
+  return $gridPlay;
+}
+
 
 //Function de création du tableau de l'ordre alphabétique
 //
@@ -209,7 +248,16 @@ function displayGrid($grid)
       $out .='  <tr>
       <td>'.($y + 1).'</td>';
       for ($x=0; $x < 10; $x++) { 
-       $out .= '<td>'.$grid[$y][$x].'</td>';
+        if($grid[$y][$x] == "X") {
+          $out .= '<td style="color:red"><STRONG>X</STRONG></td>';
+        }elseif ($grid[$y][$x] == "O") {
+          $out .= '<td style="color:blue"><STRONG>O</STRONG></td>';
+        }elseif ($grid[$y][$x] == "C") {
+          $out .= '<td style="color:black"><STRONG>C</STRONG></td>';
+        } else {
+          $out .= '<td>'.$grid[$y][$x].'</td>';
+        }
+       
      }
      $out .= '</tr>';
    }
