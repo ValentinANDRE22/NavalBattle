@@ -1,8 +1,15 @@
 	<?php 
 	session_start();
 	include 'includes/all.php';
+	//On test si l'utilisateur veux réinitialiser la partie
+	if(isset($_POST['reinitialisation'])){
+		echo 'il y a eu réinit';
+		session_unset();
+
+	}
+
 	//On controle si une session existe déjà.
-	if (isset($_SESSION["gridRef"])) {
+	if(isset($_SESSION["gridRef"])) {
 		//Si ell existe un récupère les donnée de la partie en session.
 		echo 'il y a une cession';
 		$gridRef = $_SESSION["gridRef"];
