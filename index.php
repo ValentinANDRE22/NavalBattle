@@ -1,6 +1,7 @@
 	<?php 
 	session_start();
 	include 'includes/all.php';
+	$erreur = 0;
 	//On test si l'utilisateur veux réinitialiser la partie
 	if(isset($_POST['reinitialisation'])){
 		echo 'il y a eu réinit';
@@ -21,6 +22,46 @@
 		$gridPlay = InitGridPlay();
 		$tablePvNavire = InitTablePv();
 
+	}
+
+	//On test si l'utilisateur a complété le formulaire de tire
+	if(isset($_POST['y']) && isset($_POST['x'])){
+
+		//Test de validité des données
+		if(!is_numeric($_POST['y'])){
+			$erreur = 1;
+		} 
+		if($_POST['y'] < 1){
+			echo "errrrreur";
+			$erreur = 1;
+		}
+		if($_POST['y'] > 10){
+			echo "errr";
+			$erreur = 1;
+		}
+
+		if ($erreur == 0) {
+
+			if(strtoupper($_POST['x']) == "A" or strtoupper($_POST['x']) == "B" or strtoupper($_POST['x']) == "C" or strtoupper($_POST['x']) == "D" or strtoupper($_POST['x']) == "E" or strtoupper($_POST['x']) == "F" or strtoupper($_POST['x']) == "G" or strtoupper($_POST['x']) == "H"  or strtoupper($_POST['x']) == "I"  or strtoupper($_POST['x']) == "J") {
+			//
+			$ordreAlpha = InitTableOrdre();
+			$y = $_POST['y'] - 1;
+			$x = $ordreAlpha[strtoupper($_POST['x'])]; 
+
+			var_dump($y);
+			var_dump($x);
+
+
+
+			$gridPlay[$y][$x] = $gridRef[$y][$x];
+			if($gridRef[$y][$x] == "") {
+				$gridPlay[$y][$x] = "O";
+			}
+		} else {
+			$erreur = 1;
+		}
+		}
+		
 	}
 
 
@@ -76,14 +117,23 @@
 						<p>C = Coulé.</p>
 					</div>
 				</br>
-				<div class="alert alert-danger"><STRONG>Erreur :</STRONG> Coordonnées incorrecte.</div>
+
+				<?php 
+				// On test si il y a une erreur , si oui on affiche une alert. 
+				if ($erreur == 1) {
+					echo '<div class="alert alert-danger"><STRONG>Erreur :</STRONG> Coordonnées incorrecte.</div>';
+				}
+
+				 ?>
+				
 			</br>
 			<form action="index.php" method="POST">
+
 				<label>Colonne</label>
-				<input type="text" name="y"></br>
-				<label>Ligne</label>
 				<input type="text" name="x"></br>
-				<input type="submit" name="valider" value="Valider" class="btn btn-primary">
+				<label>Ligne</label>
+				<input type="text" name="y"></br>
+				<input type="submit" name="valider" value="Tirer" class="btn btn-primary">
 			</form>
 
 		</div>

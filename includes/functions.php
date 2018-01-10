@@ -64,6 +64,29 @@ function InitTablePv()
   return $tablePvNavire;
 }
 
+//Function de création du tableau de l'ordre alphabétique
+//
+//@return array contenant la position dans l'alphabet d'une lettre
+function InitTableOrdre()
+{
+
+ //Initialisation du tableau des ordres
+  $ordreAlpha =  array(
+    'A' => 0, 
+    'B' => 1,
+    'C' => 2,
+    'D' => 3,
+    'E' => 4,
+    'F' => 5, 
+    'G' => 6,
+    'H' => 7,
+    'I' => 8,
+    'J' => 9,
+    );
+
+  return $ordreAlpha;
+}
+
 //Function de placement des bateaux
 //
 //@param tableau de référence vide
@@ -153,15 +176,6 @@ function placeBoat($codeBoat, $lengthBoat, $gridRef)
 
   return $gridRef;
 }
-
-/*//Fonction check le contenu d'une case.
-//
-//@param les coordonnées de la case et le tableau
-//@return le contenu de la case
-function CheckCase($y,$x, $gridRef) {
-  return 
-}*/
-
 
 
 //-------------------------------- Fontcions d'affichage -----------------------------
